@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // for default admin
         \App\Models\User::insert([
             'name' => 'Tufan Kılınç',
             'email' => 'tufankilinc@outlook.com',
@@ -23,5 +25,10 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         // \App\Models\User::factory(1)->create();
+
+        // Bu eski bir yöntem ancak ( php artisan db:seed --class="QuizSeeder" ) komutu ile spesifik fake data oluşturmada önemli
+        $this->call([
+            QuizSeeder::class,
+        ]);
     }
 }

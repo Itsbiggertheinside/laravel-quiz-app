@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/panel', function () {
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => '/admin'], function() {
 
-    Route::get('/deneme', function () {
-        return 'middleware testi';
-    });
-
-    Route::get('/prefix', function() {
-        return 'prefix';
-    });
+    Route::resource('quiz', QuizController::class);
 
 });

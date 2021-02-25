@@ -13,6 +13,10 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        @if (isset($style))
+            <style>{{ $style }}</style>
+        @endif
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -39,6 +43,31 @@
             <main>
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                        {{-- Errors --}}
+                        @if ($errors->any())
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="card-panel red lighten-2 text-white">
+                                        @foreach ($errors->all() as $error)
+                                        <p>{{ $error }} *</p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        {{-- Success --}}
+                        @if (session('success'))
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card-panel green lighten-2 text-white">
+                                    <p>{{ session('success') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
                         {{ $slot }}
                     </div>
                 </div>
@@ -46,7 +75,9 @@
 
         </div>
 
-        <script>{{ $script }}</script>
+        @if (isset($script))
+            <script>{{ $script }}</script>
+        @endif
 
         @stack('modals')
 

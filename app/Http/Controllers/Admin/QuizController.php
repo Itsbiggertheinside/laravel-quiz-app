@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Quiz;
+use App\Http\Requests\QuizCreateRequest;
+use App\Http\Requests\QuizUpdateRequest;
 
 class QuizController extends Controller
 {
@@ -36,9 +38,11 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuizCreateRequest $request)
     {
-        //
+        Quiz::create($request->post());
+
+        return redirect(route('quiz.index'))->withSuccess('Quiz başarıyla oluşturuldu!');
     }
 
     /**
@@ -60,7 +64,8 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
-        //
+        $instance = Quiz::find($id) ?? abort(404, 'Quiz bulunamadı');
+        return view('admin.quiz.edit', compact('instance'));
     }
 
     /**
@@ -70,9 +75,12 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuizUpdateRequest $request, $id)
     {
-        //
+        $quiz = Quiz::find($id) ?? abort(404, 'Quiz bulunamadı');
+        Quiz::where('id', $id)->update($request->validated());
+
+        return redirect()->route('quiz.index')->withSuccess('Quiz başarıyla güncellendi!');
     }
 
     /**

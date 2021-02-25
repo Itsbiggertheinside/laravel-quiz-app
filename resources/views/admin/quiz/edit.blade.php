@@ -3,13 +3,14 @@
     
     <div class="card-panel">
         <div class="row">
-            <form action="{{ route('quiz.store') }}" method="POST" class="col s12">
+            <form action="{{ route('quiz.update', $instance->id) }}" method="POST" class="col s12">
                 @csrf
+                @method('PUT')
                 <div class="input-field col s12">
-                    <input type="text" id="quiz__form__title" name="title" placeholder="Quiz başlığı" value="{{ old('title') }}">
+                    <input type="text" id="quiz__form__title" name="title" placeholder="Quiz başlığı" value="{{ $instance->title }}">
                 </div>
                 <div class="input-field col s12">
-                    <textarea name="description" id="quiz__form__description" cols="30" rows="10" class="materialize-textarea" placeholder="Quiz açıklaması">{{ old('description') }}</textarea>
+                    <textarea name="description" id="quiz__form__description" cols="30" rows="10" class="materialize-textarea" placeholder="Quiz açıklaması">{{ $instance->description }}</textarea>
                 </div>
                 <div class="input-field col s12">
                     <p>
@@ -20,10 +21,10 @@
                     </p>
                 </div>
                 <div class="input-field col s12 hidden" id="quiz__form__finished_at_div">
-                    <input type="datetime-local" name="finished_at" id="quiz__form__finished_at" value="{{ old('finished_at') }}">
+                    <input type="datetime-local" name="finished_at" id="quiz__form__finished_at" value="{{ $instance->finished_at }}">
                 </div>
 
-                <button type="submit" value="submit" class="btn">Quiz Oluştur</button>
+                <button type="submit" value="submit" class="btn">Quiz Güncelle</button>
             </form>
         </div>
     </div>

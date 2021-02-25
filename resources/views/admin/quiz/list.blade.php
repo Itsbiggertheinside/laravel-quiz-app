@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ $quiz->title }}</td>
                         <td>{{ $quiz->status }}</td>
-                        <td>{{ $quiz->finished }}</td>
+                        <td>{{ $quiz->finished_at }}</td>
                         <td>
                             <div class="center" style="width: 26px; height: 26px; display: inline-block;">
                                 <a href="#">

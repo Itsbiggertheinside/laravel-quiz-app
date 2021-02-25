@@ -80,7 +80,7 @@ class QuizController extends Controller
         $quiz = Quiz::find($id) ?? abort(404, 'Quiz bulunamadı');
         $quiz->update($request->validated());
 
-        return redirect()->route('quiz.index')->withSuccess('Quiz başarıyla güncellendi!');
+        return redirect(route('quiz.index'))->withSuccess('Quiz başarıyla güncellendi!');
     }
 
     /**
@@ -91,6 +91,9 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quiz = Quiz::find($id) ?? abort(404, 'Quiz bulunamadı');
+        $quiz->delete();
+
+        return redirect(route('quiz.index'))->withSuccess('Quiz Silindi!');
     }
 }

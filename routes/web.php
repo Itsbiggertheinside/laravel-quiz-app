@@ -25,5 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/panel', function () {
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => '/admin'], function() {
 
     Route::resource('quiz', QuizController::class);
+    
+    Route::get('quiz/{id}/delete', [QuizController::class, 'destroy'])->name('quiz.remove');
 
 });
